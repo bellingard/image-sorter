@@ -1,12 +1,10 @@
 package fr.bellingard.tools.imagesorter;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -83,12 +81,16 @@ public class ImageSorterTest {
 
         String message = sorter.handleFile(image);
 
-        assertThat(message).contains("Could not find creation date from Exif or file name. Skipping");
+        assertThat(message).contains("Could not find creation date from Exif or file name. Archiving");
         assertThat(message).contains("20142105_wrong-timestamp.wav");
 
         Path copiedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
                 "2014", "2014-21-05", image.getFileName().toString());
         assertThat(Files.notExists(copiedImage));
+
+        Path archivedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
+                "non-sorted", image.getFileName().toString());
+        assertThat(Files.exists(archivedImage));
     }
 
     private String getPath(String fileName) {

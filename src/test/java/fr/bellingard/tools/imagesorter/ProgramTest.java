@@ -52,7 +52,8 @@ public class ProgramTest {
         assertThat(Files.exists(targetFolder.resolve("2015").resolve("2015-07-26").resolve("DSC_3220.jpg")));
 
         // check that there's no other folder elsewhere
-        assertThat(Files.list(targetFolder).count()).isEqualTo(2);
+        assertThat(Files.list(targetFolder).count()).isEqualTo(3);
+        assertThat(Files.list(targetFolder.resolve("non-sorted")).count()).isEqualTo(1);
         assertThat(Files.list(targetFolder.resolve("2014")).count()).isEqualTo(1);
         assertThat(Files.list(targetFolder.resolve("2015")).count()).isEqualTo(2);
         assertThat(Files.list(targetFolder.resolve("2014").resolve("2014-01-05")).count()).isEqualTo(1);
