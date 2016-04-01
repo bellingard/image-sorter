@@ -47,15 +47,18 @@ public class ProgramTest {
         Program.run(sourceFolder, targetFolder);
 
         // check that the files were copied
+        assertThat(Files.exists(targetFolder.resolve("2013").resolve("2013-05-03").resolve("VID_20130503_123.wav")));
         assertThat(Files.exists(targetFolder.resolve("2014").resolve("2014-01-05").resolve("20140105_123456.wav")));
         assertThat(Files.exists(targetFolder.resolve("2015").resolve("2015-03-14").resolve("20150314_100153.jpg")));
         assertThat(Files.exists(targetFolder.resolve("2015").resolve("2015-07-26").resolve("DSC_3220.jpg")));
 
         // check that there's no other folder elsewhere
-        assertThat(Files.list(targetFolder).count()).isEqualTo(3);
+        assertThat(Files.list(targetFolder).count()).isEqualTo(4);
         assertThat(Files.list(targetFolder.resolve("non-sorted")).count()).isEqualTo(1);
+        assertThat(Files.list(targetFolder.resolve("2013")).count()).isEqualTo(1);
         assertThat(Files.list(targetFolder.resolve("2014")).count()).isEqualTo(1);
         assertThat(Files.list(targetFolder.resolve("2015")).count()).isEqualTo(2);
+        assertThat(Files.list(targetFolder.resolve("2013").resolve("2013-05-03")).count()).isEqualTo(1);
         assertThat(Files.list(targetFolder.resolve("2014").resolve("2014-01-05")).count()).isEqualTo(1);
         assertThat(Files.list(targetFolder.resolve("2015").resolve("2015-03-14")).count()).isEqualTo(1);
         assertThat(Files.list(targetFolder.resolve("2015").resolve("2015-07-26")).count()).isEqualTo(1);

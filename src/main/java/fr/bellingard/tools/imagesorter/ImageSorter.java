@@ -22,7 +22,7 @@ public class ImageSorter {
         String day;
     }
 
-    private static final Pattern datePattern = Pattern.compile("(2\\d{3})([0-1]\\d)([0-3]\\d).*");
+    private static final Pattern datePattern = Pattern.compile("(\\w\\w\\w_)?(2\\d{3})([0-1]\\d)([0-3]\\d)_.*");
 
     private Path targetFolder;
     private Path nonSortedFolder;
@@ -47,7 +47,7 @@ public class ImageSorter {
                 message = image.getFileName() + " copied to " + targetFolderWithDate;
             }
         } catch (IOException e) {
-            message = "Could not move " + image.toString() + "./n=> Reason is: " + e.getMessage();
+            message = "Could not move " + image.toString() + ".\n=> Reason is: " + e.getMessage();
         }
 
         return message;
@@ -87,9 +87,9 @@ public class ImageSorter {
         Matcher matcher = datePattern.matcher(name);
         if (matcher.matches()) {
             creationDay = new CreationDay();
-            creationDay.year = matcher.group(1);
-            creationDay.month = matcher.group(2);
-            creationDay.day = matcher.group(3);
+            creationDay.year = matcher.group(2);
+            creationDay.month = matcher.group(3);
+            creationDay.day = matcher.group(4);
         }
 
         return creationDay;

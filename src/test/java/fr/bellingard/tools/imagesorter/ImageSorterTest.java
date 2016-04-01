@@ -75,6 +75,22 @@ public class ImageSorterTest {
     }
 
     @Test
+    public void should_move_any_timestamped_file_with_prefix() throws Exception {
+        Path image = Paths.get(ClassLoader.getSystemResource(
+                getPath("should_move_any_timestamped_file/VID_20140105_123456.wav")).toURI());
+
+        String message = sorter.handleFile(image);
+
+        assertThat(message).contains("VID_20140105_123456.wav");
+        assertThat(message).contains("copied to");
+        assertThat(message).contains("2014/2014-01-05");
+
+        Path copiedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
+                "2014", "2014-01-05", image.getFileName().toString());
+        assertThat(Files.exists(copiedImage));
+    }
+
+    @Test
     public void should_move_any_timestamped_file_but_wrong_timestamp() throws Exception {
         Path image = Paths.get(ClassLoader.getSystemResource(
                 getPath("should_move_any_timestamped_file/20142105_wrong-timestamp.wav")).toURI());
