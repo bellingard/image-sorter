@@ -24,7 +24,7 @@ public class ProgramTest {
         assertThat(Program.run(sourceFolder, null)).isEqualTo(Program.EXIT_CODE_UNEXISTING_SOURCE_FOLDER);
 
         sourceFolder = Paths.get(ClassLoader.getSystemResource(getPath("DSC_3220.JPG")).toURI());
-        assertThat(Files.exists(sourceFolder));
+        assertThat(Files.exists(sourceFolder)).isTrue();
         assertThat(Program.run(sourceFolder, null)).isEqualTo(Program.EXIT_CODE_UNEXISTING_SOURCE_FOLDER);
     }
 
@@ -35,7 +35,7 @@ public class ProgramTest {
         assertThat(Program.run(sourceFolder, targetFolder)).isEqualTo(Program.EXIT_CODE_UNEXISTING_TARGET_FOLDER);
 
         targetFolder = Paths.get(ClassLoader.getSystemResource(getPath("DSC_3220.JPG")).toURI());
-        assertThat(Files.exists(targetFolder));
+        assertThat(Files.exists(targetFolder)).isTrue();
         assertThat(Program.run(sourceFolder, targetFolder)).isEqualTo(Program.EXIT_CODE_UNEXISTING_TARGET_FOLDER);
     }
 
@@ -47,10 +47,14 @@ public class ProgramTest {
         Program.run(sourceFolder, targetFolder);
 
         // check that the files were copied
-        assertThat(Files.exists(targetFolder.resolve("2013").resolve("2013-05-03").resolve("VID_20130503_123.wav")));
-        assertThat(Files.exists(targetFolder.resolve("2014").resolve("2014-01-05").resolve("20140105_123456.wav")));
-        assertThat(Files.exists(targetFolder.resolve("2015").resolve("2015-03-14").resolve("20150314_100153.jpg")));
-        assertThat(Files.exists(targetFolder.resolve("2015").resolve("2015-07-26").resolve("DSC_3220.jpg")));
+        assertThat(Files.exists(targetFolder.resolve("2013").resolve("2013-05-03").resolve("VID_20130503_123.wav")))
+                .isTrue();
+        assertThat(Files.exists(targetFolder.resolve("2014").resolve("2014-01-05").resolve("20140105_123456.wav")))
+                .isTrue();
+        assertThat(Files.exists(targetFolder.resolve("2015").resolve("2015-03-14").resolve("20150314_100153.jpg")))
+                .isTrue();
+        assertThat(Files.exists(targetFolder.resolve("2015").resolve("2015-07-26").resolve("DSC_3220.jpg")))
+                .isTrue();
 
         // check that there's no other folder elsewhere
         assertThat(Files.list(targetFolder).count()).isEqualTo(4);

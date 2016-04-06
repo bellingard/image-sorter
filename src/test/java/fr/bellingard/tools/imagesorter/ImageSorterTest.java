@@ -39,7 +39,7 @@ public class ImageSorterTest {
 
         Path copiedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
                 "2015", "2015-03-14", image.getFileName().toString());
-        assertThat(Files.exists(copiedImage));
+        assertThat(Files.exists(copiedImage)).isTrue();
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ImageSorterTest {
 
         Path copiedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
                 "2015", "2015-07-26", image.getFileName().toString());
-        assertThat(Files.exists(copiedImage));
+        assertThat(Files.exists(copiedImage)).isTrue();
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ImageSorterTest {
 
         Path copiedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
                 "2014", "2014-01-05", image.getFileName().toString());
-        assertThat(Files.exists(copiedImage));
+        assertThat(Files.exists(copiedImage)).isTrue();
     }
 
     @Test
@@ -87,7 +87,7 @@ public class ImageSorterTest {
 
         Path copiedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
                 "2014", "2014-01-05", image.getFileName().toString());
-        assertThat(Files.exists(copiedImage));
+        assertThat(Files.exists(copiedImage)).isTrue();
     }
 
     @Test
@@ -102,11 +102,11 @@ public class ImageSorterTest {
 
         Path copiedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
                 "2014", "2014-21-05", image.getFileName().toString());
-        assertThat(Files.notExists(copiedImage));
+        assertThat(Files.notExists(copiedImage)).isTrue();
 
         Path archivedImage = Paths.get(targetFolder.getRoot().getAbsolutePath(),
                 "non-sorted", image.getFileName().toString());
-        assertThat(Files.exists(archivedImage));
+        assertThat(Files.exists(archivedImage)).isTrue();
     }
 
     private String getPath(String fileName) {
